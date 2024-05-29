@@ -1,0 +1,23 @@
+.my-carousel {
+    margin-top: 50px; /* Add top margin */
+}
+
+.my-carousel .carousel-item img {
+    width: 90%; /* Shrink the image width to 90% */
+    height: 50%; /* Maintain the aspect ratio */
+    margin: 10 auto; /* Center the images */
+}
+
+.my-custom-class{
+    width: 90%; /* Shrink the image width to 90% */
+    height: 50%; /* Maintain the aspect ratio */
+    margin: 10px;
+}
+
+.pics {
+    border-top: 60px;
+    color: red;
+}
+.nav-margin{
+    margin-bottom: 20px;
+}
