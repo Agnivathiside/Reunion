@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "postinstall": "npm rebuild"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +22,5 @@
     "util": "^0.12.5",
     "uuid": "^9.0.1",
     "xlsx": "^0.18.5"
-  },
-  "engines": {
-    "node": "20.12.2"
   }
 }

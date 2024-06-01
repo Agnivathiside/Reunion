@@ -19,6 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const writeFile = promisify(fs.writeFile);
 
+app.use(express.static('static')); // Serve static files from the 'static' directory
+
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/static/index.html");
 });
