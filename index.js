@@ -8,7 +8,7 @@ import fs from "fs";
 import { promisify } from "util";
 import { createCanvas, loadImage } from "canvas";
 import { v4 as uuidv4 } from 'uuid';
-import XLSX from 'xlsx'; // Correct the import
+import XLSX from 'xlsx'; 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const writeFile = promisify(fs.writeFile);
 
-app.use(express.static('static')); // Serve static files from the 'static' directory
+app.use(express.static('static')); 
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/static/index.html");
@@ -51,21 +51,23 @@ app.post("/submit", async (req, res) => {
     const canvas = createCanvas(templateImage.width, templateImage.height);
     const ctx = canvas.getContext('2d');
 
+    console.log("Template width "+templateImage.width + " and template height is "+ templateImage.height);
+
     // Draw template
     ctx.drawImage(templateImage, 0, 0);
 
     // Draw QR code (enlarged)
     const qrCode = await loadImage(qrCodeDataURL);
-    const qrCodeSize = 1000; // Adjust this value to set the size of the QR code
+    const qrCodeSize = 1000; 
     const qrX = (canvas.width - qrCodeSize) / 2;
-    const qrY = (canvas.height / 2 - qrCodeSize) / 2 - 100; // Centered in the upper half
+    const qrY = (canvas.height / 2 - qrCodeSize) / 2 - 100; 
     ctx.drawImage(qrCode, qrX, qrY, qrCodeSize, qrCodeSize);
 
     // Add user details
     const textX = canvas.width / 2;
-    const textY = canvas.height / 2 + 50; // Adjusted to be in the lower half
+    const textY = canvas.height / 2 + 50; 
     ctx.textAlign = 'center';
-    ctx.font = '70px Arial'; // Adjust font size as needed
+    ctx.font = '70px Arial';
     ctx.fillStyle = '#000';
     ctx.fillText(`Name: ${name}`, textX, textY);
     ctx.fillText(`Email: ${email}`, textX, textY + 60);
@@ -121,14 +123,14 @@ app.post("/submit", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'bhattacharjee.agniva.jobs@gmail.com', // Replace with your email address
-        pass: 'dovz mfxv bfcy inpl'   // Replace with your email password or app-specific password
+        user: 'bhattacharjee.agniva.jobs@gmail.com', 
+        pass: 'dovz mfxv bfcy inpl'   
       }
     });
 
     // Email options with attachment
     const mailOptions = {
-      from: 'bhattacharjee.agniva.jobs@gmail.com', // Replace with your email address
+      from: 'bhattacharjee.agniva.jobs@gmail.com', 
       to: email,
       subject: 'Your Event QR Code',
       html: htmlContent,
