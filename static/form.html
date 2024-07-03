@@ -11,8 +11,8 @@
     <form action="submit" method="post">
         <div class="form-group">
             <label for="exampleInputName">Enter Name</label>
-            <input type="text" name="Name" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Enter name" required>
-          </div>
+            <input type="text" name="Name" class="form-control" id="exampleInputName" aria-describedby="nameHelp" placeholder="Enter name" required>
+        </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
           <input type="email" name="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
@@ -20,14 +20,18 @@
         </div>
         <div class="form-group">
             <label for="exampleInputPhone">Phone number</label>
-            <input type="text" name="phone" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" placeholder="Enter your number" required>
-          </div>
+            <input type="text" name="phone" class="form-control" id="exampleInputPhone" aria-describedby="phoneHelp" placeholder="Enter your number" required>
+        </div>
         <div class="form-group">
           <label for="exampleInputPassoutYear">Passout Year</label>
           <input type="number" name="passoutyear" class="form-control" id="exampleInputPassoutYear" placeholder="Enter your pass out year" required>
         </div>
-        <button type="submit" value="submit" class="btn btn-primary">Submit</button>
-      </form>
+        <div class="form-group">
+          <label for="exampleInputTransactionID">Transaction ID</label>
+          <input type="text" name="transactionid" class="form-control" id="exampleInputTransactionID" placeholder="Enter your transaction ID" required>
+        </div>
+        <button type="submit" value="submit" class="btn btn-primary">Proceed to Pay</button>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

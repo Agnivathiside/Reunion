@@ -37,12 +37,13 @@ app.post("/submit", async (req, res) => {
     const email = req.body["Email"];
     const no = req.body["phone"];
     const passOutYear = req.body["passoutyear"];
+    const transactionID= req.body["transactionid"];
 
     // Generate a unique ID
     const uniqueId = uuidv4();
 
     // Generate a QR code as a data URL
-    const qrCodeData = `ID: ${uniqueId}, Name: ${name}, Email: ${email}, Phone: ${no}, Year of Pass Out: ${passOutYear}`;
+    const qrCodeData = `ID: ${uniqueId}, Name: ${name}, Email: ${email}, Phone: ${no}, Year of Pass Out: ${passOutYear}, Transation Id: ${transactionID}`;
     const qrCodeDataURL = await qrcode.toDataURL(qrCodeData);
 
     // Create a composite image with the QR code and user details
@@ -74,6 +75,7 @@ app.post("/submit", async (req, res) => {
     ctx.fillText(`Phone: ${no}`, textX, textY + 120);
     ctx.fillText(`Year of Pass Out: ${passOutYear}`, textX, textY + 180);
     ctx.fillText(`ID: ${uniqueId}`, textX, textY + 240);
+    ctx.fillText(`Transaction ID: ${transactionID}`, textX, textY+280);
 
     // Save composite image to file
     const outputImagePath = `${__dirname}/static/composite_${email}.png`;
@@ -81,7 +83,7 @@ app.post("/submit", async (req, res) => {
     await writeFile(outputImagePath, buffer);
 
     // Save details to Excel sheet
-    const excelFilePath = `${__dirname}/static/registrations.xlsx`;
+    const excelFilePath = `${__dirname}/static/registrations1.xlsx`;
     let workbook;
     let worksheet;
 
@@ -91,12 +93,12 @@ app.post("/submit", async (req, res) => {
       worksheet = workbook.Sheets[workbook.SheetNames[0]];
     } else {
       workbook = XLSX.utils.book_new();
-      worksheet = XLSX.utils.aoa_to_sheet([["Name", "Email", "Phone", "Pass Out Year", "Unique ID", "Entered"]]);
+      worksheet = XLSX.utils.aoa_to_sheet([["Name", "Email", "Phone", "Pass Out Year", "Unique ID", "Transaction ID", "Entered"]]);
       XLSX.utils.book_append_sheet(workbook, worksheet, "Registrations");
     }
 
     // Append the new row
-    const newRow = [name, email, no, passOutYear, uniqueId, ""]; // "Entered" column left blank
+    const newRow = [name, email, no, passOutYear, uniqueId, transactionID, ""]; // "Entered" column left blank
     XLSX.utils.sheet_add_aoa(worksheet, [newRow], { origin: -1 });
 
     // Write to file
@@ -113,6 +115,7 @@ app.post("/submit", async (req, res) => {
             <li>Phone Number: ${no}</li>
             <li>Year of Pass Out: ${passOutYear}</li>
             <li>Unique ID: ${uniqueId}</li>
+            <li>Transaction ID: ${transactionID}</li>
           </ul>
           <p>Attached is your unique QR code image.</p>
           <p>Best regards,<br>Your Company</p>
